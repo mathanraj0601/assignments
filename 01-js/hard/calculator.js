@@ -16,6 +16,88 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor() {
+    this.result = 0;
+  }
+
+  add(number) {
+    this.result += number;
+  }
+
+  subtract(number) {
+    this.result -= number;
+  }
+
+  multiply(number) {
+    this.result *= number;
+  }
+
+  divide(number) {
+    if (number === 0) {
+      throw new Error("Can divide by zero");
+    }
+    this.result /= number;
+  }
+
+  clear() {
+    this.result = 0;
+  }
+
+  getResult() {
+    return this.result;
+  }
+
+  calculate(expression) {
+    const cleanedExpression = expression.replace(/\s+/g, "");
+    const isMatch = cleanedExpression.match(/^[\d\+\*\-\/\(\)\.]+$/);
+    if (!isMatch) {
+      throw new Error("Invalid Character");
+    }
+    try {
+      let final = eval(cleanedExpression);
+      if (final === Infinity) {
+        throw new Error("Divide by zero");
+      }
+      this.result = final;
+    } catch (error) {
+      throw new Error("Invalid Paranthesis");
+    }
+    // if(!cleanedExpression.test(/^[\d\+\*\-\/\(\)\.]+$/))
+    // return eval(e)
+    // let stack = [];
+    // let element = expression.split("");
+    // for (let i = 0; i < element.length; i++) {
+    //   if (element[i] === ")") {
+    //   }
+    //   if (element[i] === " " || element[i] === "") continue;
+    //   if (
+    //     element[i] === "+" ||
+    //     element[i] === "-" ||
+    //     element[i] === "*" ||
+    //     element[i] === " " ||
+    //     element[i] === "("
+    //   ) {
+    //     stack.push(element[i]);
+    //     continue;
+    //   }
+    //   if (Number(element[i])) {
+    //     let temp = "";
+    //     while (Number(element[i])) {
+    //       temp += element[i];
+    //       i++;
+    //     }
+    //     i--;
+    //     stack.push(Number(temp));
+    //     continue;
+    //   } else {
+    //     throw new Error("Invalid character");
+    //   }
+    // }
+    // console.log(stack, "stack");
+    // if (stack.length > 0) throw new Error("Invalid Paranthesis");
+    // console.log(element, "element");
+  }
+}
 
 module.exports = Calculator;

@@ -4,6 +4,34 @@
 */
 
 function isPalindrome(str) {
+  let length = str.length;
+  str = str.toLowerCase();
+  let start = 0;
+  let end = length - 1;
+  while (start < end) {
+    if (
+      str.charCodeAt(start) < "a".charCodeAt(0) ||
+      str.charCodeAt(start) > "z".charCodeAt(0)
+    ) {
+      start++;
+      continue;
+    }
+
+    if (
+      str.charCodeAt(end) < "a".charCodeAt(0) ||
+      str.charCodeAt(end) > "z".charCodeAt(0)
+    ) {
+      end--;
+      continue;
+    }
+
+    if (str[start] !== str[end]) {
+      return false;
+    } else {
+      end--;
+      start++;
+    }
+  }
   return true;
 }
 
